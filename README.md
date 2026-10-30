@@ -63,3 +63,10 @@ Page notes: “Calculated until January 1992: all G(n) with n ≤ 80·10⁶, whi
 ## License
 
 MIT. `tests/data/` holds b-files from the OEIS (A002188, A036685, A180120, A180121), used under CC BY-SA 4.0. `tools/data/flammenkamp.json` is transcribed from Achim Flammenkamp's page linked above.
+
+<!-- sen-publish:links -->
+## Links
+
+- 🌐 Demo: https://sen.ltd/portfolio/grundys-game/
+- 📝 記事: https://qiita.com/sen-ltd/items/5202981190fbc292fec0
+<!-- /sen-publish:links -->
