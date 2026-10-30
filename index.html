@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grundy's game — split a heap into two unequal heaps, with every value and Flammenkamp's sparse table</title>
+    <meta
+      name="description"
+      content="Grundy's game (split one heap into two heaps of different sizes) with its Sprague-Grundy values: play several heaps at once as a sum of games with every split marked winning or losing, see the values up to 30,000, and Flammenkamp's list of the 1287 sparse values recomputed in sparse space."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141518'/%3E%3Ccircle cx='8' cy='16' r='3.5' fill='%23d9b45a'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23d9b45a'/%3E%3Cpath d='M20.5 8v16' stroke='%23ecebe7' stroke-width='2'/%3E%3Ccircle cx='25' cy='16' r='3.5' fill='%23ecebe7'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Grundy's game <span>split a heap, but never in half</span></h1>
+        <p class="sub">
+          A move takes <strong>one heap</strong> and splits it into <strong>two heaps of different sizes</strong>.
+          Heaps of 1 and 2 cannot be split; whoever makes the last split wins. Every heap size n has a Grundy value G(n),
+          and a position is lost for the player to move exactly when its heaps' values XOR to 0. Pick a heap: cuts marked
+          <strong class="win-t">✓</strong> leave XOR 0 behind, <strong class="lose-t">✗</strong> do not.
+        </p>
+      </header>
+
+      <div id="wrap">
+        <div class="stage">
+          <div class="controls">
+            <label class="sel">heaps
+              <select id="countSel">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+              </select>
+            </label>
+            <label class="sel">size up to
+              <select id="sizeSel">
+                <option value="20">20</option>
+                <option value="40" selected>40</option>
+                <option value="60">60</option>
+              </select>
+            </label>
+            <label class="sel">you move
+              <select id="youSel">
+                <option value="first">first</option>
+                <option value="second">second</option>
+              </select>
+            </label>
+            <label class="sel chk"><input type="checkbox" id="hints" checked /> hints</label>
+            <button id="undo">Undo</button>
+            <button id="newGame" class="primary">New game</button>
+          </div>
+          <div id="boardwrap"><svg id="board" role="img" aria-label="Heaps"></svg></div>
+          <div id="status" aria-live="polite"></div>
+        </div>
+        <div class="side">
+          <h3>value of the position</h3>
+          <div class="panel" id="value"></div>
+          <h3>checked against the literature</h3>
+          <div class="panel" id="paper"></div>
+        </div>
+      </div>
+
+      <section class="explore">
+        <div class="col">
+          <h3>G(n), and the rare sparse values</h3>
+          <div class="panel">
+            <div class="controls">
+              <label class="sel">heaps up to
+                <select id="rangeSel">
+                  <option value="300">300</option>
+                  <option value="3000">3,000</option>
+                  <option value="30000" selected>30,000</option>
+                </select>
+              </label>
+            </div>
+            <canvas id="plot" width="600" height="380" aria-label="Grundy values of Grundy's game"></canvas>
+            <p class="small dim" id="plotInfo"></p>
+          </div>
+        </div>
+        <div class="col">
+          <h3>the sparse heaps</h3>
+          <div class="panel" id="sparseTable"></div>
+        </div>
+      </section>
+
+      <section class="notes">
+        <h2>Why the heaps add up</h2>
+        <p>
+          A heap of n is worth G(n) = mex { G(a) ⊕ G(n − a) : a &lt; n − a }, the smallest number not among the values
+          of its splits; by the Sprague–Grundy theorem a position of several heaps, where each turn splits one of them,
+          is worth the XOR of their values. G(n) = 0 only 42 times, the last at n = 1222; nobody knows whether the
+          sequence is eventually periodic.
+        </p>
+        <h2>Sparse space</h2>
+        <p>
+          Call a value <em>common</em> when its bits other than the lowest have odd parity, <em>sparse</em> otherwise
+          (Flammenkamp's mask 0111…10). Common ⊕ common and sparse ⊕ sparse are sparse; common ⊕ sparse is common.
+          Almost every heap has a common value, so every common option of a heap comes from a split with exactly one
+          of the few sparse heaps — about 1,300 lookups instead of n/2. The sparse values below the answer still have
+          to be ruled out, by scanning splits a = 1, 2, … until each has appeared; on average about 3,100 splits.
+          When the scan runs out, a new sparse heap has been found. The last known one is n = 48,399,022.
+        </p>
+      </section>
+
+      <footer>
+        <p>
+          Built by <a href="https://sen.ltd/">SEN LLC</a>. TypeScript, no runtime
+          dependencies. <a href="https://github.com/sen-ltd/grundys-game">Source</a>.
+        </p>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

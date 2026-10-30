@@ -1,0 +1,23 @@
+{
+  "name": "grundys-game",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Grundy's game (split a heap into two unequal heaps) in the browser with its Sprague-Grundy values: several heaps played as a sum with every split marked winning or losing, and Flammenkamp's tables of the 1287 sparse values recomputed in sparse space. TypeScript, no runtime deps.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "serve": "vite preview --port 4173",
+    "test": "vitest run",
+    "compute": "node tools/compute.mts 67108864 runs/compute.json",
+    "report": "node tools/report.mts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.5"
+  },
+  "license": "MIT"
+}

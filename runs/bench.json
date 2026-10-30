@@ -1,0 +1,35 @@
+{
+ "node": "v26.3.0",
+ "rows": [
+  {
+   "N": 25000,
+   "naiveMs": 227,
+   "sweepMs": 287,
+   "same": true
+  },
+  {
+   "N": 50000,
+   "naiveMs": 991,
+   "sweepMs": 677,
+   "same": true
+  },
+  {
+   "N": 100000,
+   "naiveMs": 3880,
+   "sweepMs": 1515,
+   "same": true
+  },
+  {
+   "N": 200000,
+   "naiveMs": 16664,
+   "sweepMs": 3209,
+   "same": true
+  },
+  {
+   "N": 400000,
+   "naiveMs": 65517,
+   "sweepMs": 6833,
+   "same": true
+  }
+ ]
+}
